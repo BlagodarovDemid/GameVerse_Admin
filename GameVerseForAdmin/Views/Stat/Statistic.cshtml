@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Статистика";
+}
+
+<style>
+    .div-center1 {
+        width: 60%;
+        min-width: 700px;
+        height: 200px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        margin-top: 20px;
+        background: rgba(161, 181, 246, 0.20);
+        margin: 0px;
+    }
+    .textarea-options1 {
+        resize: none;
+        width: 200px;
+        height: 30px;
+        position: absolute;
+        color: white;
+        background-color: rgba(48, 43, 43, 0.35);
+        font-size: 15px;
+        font-family: Inter;
+        font-weight: 700;
+        border: 3px black solid
+    }
+</style>
+
+<body>
+    @using (Html.BeginForm("Statistic", "Stat", FormMethod.Post))
+    {
+        <div class="div-center1">
+            <div style="float:right; height: 400px; top: 0px; width:300px;">
+                <div style="width: 300px; height: 20px; right: 0px; top: 0px; position: absolute; color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word">Количество продаж</div>
+                <textarea name="CountOfSales" class="textarea-options1" style="right: 100px; top:18px"></textarea>
+
+                <div style="width: 300px; height: 20px; right: 0px; top: 60px; position: absolute; color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word">Продажи по категориям товаров</div>
+                <textarea name="CategorySales" class="textarea-options1" style="right: 100px; top:78px"></textarea>
+
+                <div style="width: 300px; height: 20px; right: 0px; top: 120px; position: absolute; color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word">Продажи по регионам</div>
+                <textarea name="RegionSales" class="textarea-options1" style="right: 100px; top:138px"></textarea>
+            </div>
+            <div style="position:absolute; width:300px; height:400px">
+                <div style="width: 200px; height: 20px; left: 100px; top: 0px; position: absolute; color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word">Общий доход от продаж</div>
+                <textarea name="TotalSales" class="textarea-options1" style="left: 100px; top: 18px"></textarea>
+
+                <div style="width: 200px; height: 20px; left: 100px; top: 60px; position: absolute; color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word">Средняя цена продажи</div>
+                <textarea name="AveragePrice" class="textarea-options1" style="left: 100px; top: 78px"></textarea>
+
+                <div style="width: 200px; height: 20px; left: 100px; top: 120px; position: absolute; color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word">Количество клиентов</div>
+                <textarea name="CountOfClients" class="textarea-options1" style="left: 100px; top: 138px"></textarea>
+            </div>
+        </div>
+
+        <div class="div-center1" style="height:300px">
+            <div style="width: 200px; height: 20px; position:absolute; left: 50%; transform: translate(-50%, 0%); color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word">Количество любимых игр</div>
+            <textarea name="CountOfFavouriteGames" class="textarea-options1" style="left: 50%; top: 20px; transform: translate(-50%, 0%);"></textarea>
+
+            <div style="width: 200px; height: 20px; position:absolute; top:60px; left: 50%; transform: translate(-50%, 0%); color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word">Комментарии администратора</div>
+            <textarea name="AdminsCom" class="textarea-options1" style="left: 50%; top: 80px; transform: translate(-50%, 0%); height: 150px; width:300px"></textarea>
+            <button onclick="location.href='Url.Action(" OkButton")'" style="width: 100px; height: 40px; top: 240px; left: 50%; transform: translate(-50%, 0%); position: absolute; background: rgba(161, 181, 246, 0.20)">Ok</button>
+        </div>
+    }
+
+</body>

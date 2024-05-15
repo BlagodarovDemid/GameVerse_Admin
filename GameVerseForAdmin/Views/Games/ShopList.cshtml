@@ -1,0 +1,101 @@
+﻿@using GameVerseForAdmin.Models
+@model IEnumerable<Games_Info>
+
+@{
+    ViewData["Title"] = "Страница магазина";
+}
+
+<html>
+    <head>
+        <title>Магазин</title>
+    </head>
+    <body style="background-color:#3A3E3F; width: 100%; min-width: 1200px; margin: auto;">
+        @using (Html.BeginForm("ShopList", "Games", FormMethod.Post))
+        {
+        <div style="width: 70%; min-width:800px; height: 70px; position: relative; left: 50%; transform: translate(-50%, 0%); margin-top: 20px;">
+            <div style="width: 300px; height: 36px; position: absolute; right: 5px;">
+                <input name='GameName' type="search" onkeydown="if(event.key === ' Enter'){this.form.submit();}" placeholder="Поиск" style="width: 100%; height: 100%; float: left; transform: translate(0%, 50%); border-style: none; border-radius: 15px; padding: 15px; outline: none;">
+            </div>
+        </div>
+        }
+        @if (ViewBag.Message != null)
+        {
+            <script type="text/javascript">
+                window.onload = function () {
+                    alert("@ViewBag.Message");
+                };
+            </script>
+        }
+    @{
+        foreach(var games_Info in Model)
+        {
+            foreach (var game in games_Info.Games)
+            {
+                @using (Html.BeginForm("GameProfile", "Profile", FormMethod.Post))
+                {
+                    <div class="Game1" style="width: 70%; min-width:800px; height: 130px; position: relative; left: 50%; transform: translate(-50%, 0%); margin-top: 20px; background: rgba(161, 181, 246, 0.20)">
+                        <div style="display: flex; width: 100%; height: 100%">
+
+                            <input name='GameID' value="@game.Id" style="width: 30px; height: 30px; position: absolute; bottom: 0px; left: 0px; text-align: center; font-weight: 600; background: #C1FFFF; border-radius: 15px; border-color: light-gray; border-width: 3px; color: red;" />
+                            <input type="submit" value="" style="background:transparent; position:absolute; width: 100%; height: 100%; border-style: outset; border-width: 1.7px; z-index: 1;">
+
+                            @foreach (var image in games_Info.Images)
+                            {
+                                if (image.GameId == game.Id)
+                                {
+                                    <img class="GameImage" style="width: 30%; min-width: 30%; height: 100%; flex: 1 1 auto;" src="@image.Image1" />
+                                }
+                            }
+
+                            <div class="PresentGroup" style="width: 100%; height: 100%; flex: 1 1 auto; position: relative;">
+                                <div class="GameGenre" style="width: 685px; height: 35px; bottom: 5px; left: 25px; position: absolute; color: white; font-size: 20px; font-family: Inter; font-weight: 600; word-wrap: break-word">@game.Category</div>
+                                <div class="GameName" style="width: 685px; height: 50px; bottom: 55px; left: 25px; position: absolute; color: white; font-size: 40px; font-family: Inter; font-weight: 400; word-wrap: break-word">@game.Title</div>
+                            </div>
+
+
+                            <div class="InfoGroup" style="width: 25%; height: 100%; position: relative; flex: 1 1 auto; background: rgba(161, 181, 246, 0.20)">
+
+                                <div class="Gameprice" style="width: 150px; height: 35px; position: absolute; bottom: 0px; right: 0px; background-color: transparent">
+                                    @if (Convert.ToInt32(@game.Price) > 0)
+                                    {
+                                        <img class="PriceIcon" src="~/Resources/PriceIcon.svg" style="width: 30px; height: 30px; bottom: 11px; right: 10px; position: absolute;" />
+                                        <div class="Price" style="width: 75px; height: 35px; bottom: 7px; right: 30px; position: absolute; text-align: center; color: white; font-size: 22px; font-family: Inter; font-
+                                                                        weight: 600; word-wrap: break-word">
+                                            @game.Price
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="PriceFree" style="width: 155px; height: 35px; bottom: 5px; right: 11.5px; position: absolute; text-align: right; color: white; font-size: 18px; font-family: Inter;
+                                                                        font-weight: 600;">
+                                            Бесплатно
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="OS" style="width: 70px; height: 30px; position: absolute; top: 10px; right: 10px; justify-content: flex-end; align-items: center; display: inline-flex;">
+                                    @foreach(var SysReqs in games_Info.SysReqs)
+                                    {
+                                        if (SysReqs.GameId == game.Id)
+                                        {
+                                            @if (SysReqs.OS == "Windows")
+                                            {
+                                                <img class="WindowsIcon" src="~/Resources/WindowsIcon.svg" style="width: 30px; height: 30px; position: relative; margin-right: 5px; display: flex" />
+                                            }
+                                            else
+                                            {
+                                                <img class="AppleIcon" src="~/Resources/AppleIcon.svg" style="width: 30px; height: 30px; position: relative; margin-right: 5px; display: flex" />
+                                                <img class="WindowsIcon" src="~/Resources/WindowsIcon.svg" style="width: 30px; height: 30px; position: relative; margin-right: 5px; display: flex" />
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+    </body>
+</html>
